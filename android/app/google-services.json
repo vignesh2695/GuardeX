@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "629109406539",
+    "project_id": "iot-project-479c1",
+    "storage_bucket": "iot-project-479c1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629109406539:android:6dec24cd608a87fe0606ce",
+        "android_client_info": {
+          "package_name": "com.guardex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5C2L3G1BVVOY2RkvmkhJTnjYPDVeM2NI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629109406539:android:fde0fdabcb6925d50606ce",
+        "android_client_info": {
+          "package_name": "com.sentinel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5C2L3G1BVVOY2RkvmkhJTnjYPDVeM2NI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
