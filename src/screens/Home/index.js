@@ -4,12 +4,13 @@ import { View, Text, StyleSheet, ScrollView, Animated, Image, FlatList, Pressabl
 import COLORS from '../../assets/Color';
 import styles from './styles';
 import { ApiUrls } from '../../service/Urls';
-import { WINDOW_WIDTH } from '../../utils/Constants';
+import { FontSize, FontWeight, WINDOW_WIDTH } from '../../utils/Constants';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 import IMAGES from '../../assets/images/Images';
 import { useNavigation } from '@react-navigation/native';
-import { FireAndSmokeContainer } from '../../container';
+import { FireAndSmokeContainer, SideMenuContainer } from '../../container';
+import { Icons } from '../../utils/Icons';
 
 // create a component
 const Home = (props) => {
@@ -57,6 +58,22 @@ const Home = (props) => {
 
     return (
         <View style={{ backgroundColor: COLORS.lavenderPrimary, flex: 1, top: 0 }}>
+            <View style={{ width: WINDOW_WIDTH, height: 60, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
+                <View style={{ flex: 1 }}>
+                    <Pressable style={{ width: 40, }} onPress={() => { 
+                        // console.log("sidemenu pressed")
+                        navigation.navigate(SideMenuContainer);
+                        }}>
+                        <Icons.Feather name="menu" size={30} color={COLORS.white} />
+                    </Pressable>
+                </View>
+                <View style={{ flex: 1, alignItems: 'center' }}>
+                    <Text style={{ textAlign: 'center', fontSize: FontSize.large, fontWeight: FontWeight.medium, color: COLORS.white }}>GuardeX</Text>
+                </View>
+                <View style={{ flex: 1, alignItems: 'flex-end' }}>
+                    <Image source={IMAGES.guardex_logo} style={{ width: 30, height: 30, tintColor: COLORS.white }} />
+                </View>
+            </View>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.container} showsVerticalScrollIndicator={false}>
                 {/* Profile card */}
                 {showProfile && (
@@ -92,7 +109,7 @@ const Home = (props) => {
                     justifyContent: 'center',
                     height: WINDOW_WIDTH
                 }]}
-                onPress={() => { navigation.navigate(FireAndSmokeContainer) }}>
+                    onPress={() => { navigation.navigate(FireAndSmokeContainer) }}>
                     <Image source={IMAGES.view_course} style={{ width: 100, height: 100, }} />
                     <Text style={{ color: COLORS.black, fontSize: 16 }}>{"Fire & Smoke Video List"}</Text>
                 </Pressable>

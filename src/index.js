@@ -6,6 +6,7 @@ import LinearGradient from "react-native-linear-gradient";
 import { Image, Pressable, View } from "react-native";
 import IMAGES from "./assets/images/Images";
 import { useNavigation } from "@react-navigation/native";
+import { Icons } from "./utils/Icons";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,33 +29,32 @@ const IStack = () => {
             <Stack.Screen name='LoginContainer' component={LoginContainer} options={{ headerShown: false }} />
             <Stack.Screen name='BottomStack' component={BottomStack} options={{ headerShown: false }} />
             <Stack.Screen name='HomeContainer' component={HomeContainer} options={{
-                headerShown: true,
+                headerShown: false,
                 headerTitle: 'GuardeX',
-                headerBackground: () => (<LinearGradient
-                    style={{ flex: 1 }}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 0, y: 1 }}
-                    locations={[0.4, 1.1]}
-                    colors={[COLORS.lavenderPrimary, COLORS.lavenderSecondary]}
-                />
-                ),
-                headerLeft: () => (
-                    <Pressable
-                    onPress={() => navigation.navigate(SideMenuContainer)}
-                    >
-
-                        <Image
-                            source={IMAGES.menu_line}
-                            resizeMode='contain'
-                            style={{ width: 30, height: 30, marginStart: 15 }}
-                        />
-                    </Pressable>
-                ),
-                headerRight: () => (
-                    <Image
-                        source={IMAGES.guardex_logo} style={{ width: 40, height: 40, marginRight: 10, tintColor: COLORS.white }} resizeMode='contain'
-                    />
-                )
+                // headerBackground: () => (<LinearGradient
+                //     style={{ flex: 1 }}
+                //     start={{ x: 0, y: 0 }}
+                //     end={{ x: 0, y: 1 }}
+                //     locations={[0.4, 1.1]}
+                //     colors={[COLORS.lavenderPrimary, COLORS.lavenderSecondary]}
+                // />
+                // ),
+                // headerLeft: () => (
+                //     <Pressable
+                //         onPress={() => {
+                //             // navigation.navigate(SideMenuContainer)
+                //             console.log("sidemenu press");
+                //         }}
+                //         // style={{ borderWidth: 0.5 }}
+                //     >
+                //         <Icons.Feather name="menu" size={40} color={COLORS.white} />
+                //     </Pressable>
+                // ),
+                // headerRight: () => (
+                //     <Image
+                //         source={IMAGES.guardex_logo} style={{ width: 40, height: 40, marginRight: 10, tintColor: COLORS.white }} resizeMode='contain'
+                //     />
+                // )
             }} />
 
             <Stack.Screen name='SideMenu' component={SideMenuContainer} options={{

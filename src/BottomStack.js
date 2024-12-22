@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Alert,
     Animated,
+    Image,
     Pressable,
     StyleSheet,
     TouchableOpacity,
@@ -13,6 +14,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import COLORS from './assets/Color';
 import { HomeContainer } from './container';
 import { Icons } from './utils/Icons';
+import IMAGES from './assets/images/Images';
 
 const Screen1 = () => {
     return <View style={styles.screen1} />;
@@ -55,40 +57,74 @@ export default function BottomStack() {
 
     return (
         // <NavigationContainer>
-            <CurvedBottomBar.Navigator
-                type="DOWN"
-                style={styles.bottomBar}
-                shadowStyle={styles.shawdow}
-                height={60}
-                circleWidth={60}
-                bgColor={COLORS.lavenderPrimary}
-                initialRouteName={HomeContainer}
-                borderTopLeftRight
-                renderCircle={({ selectedTab, navigate }) => (
-                    <Animated.View style={styles.btnCircleUp}>
-                        <Pressable>
-                            <Icons.FontAwesome5 name='home' onPress={() => Alert.alert('Click Action')} />
-                        </Pressable>
-                    </Animated.View>
-                )}
-                tabBar={renderTabBar}
-            >
+        // <CurvedBottomBar.Navigator
+        //     type="DOWN"
+        //     style={styles.bottomBar}
+        //     shadowStyle={styles.shawdow}
+        //     height={60}
+        //     circleWidth={60}
+        //     bgColor={COLORS.lavenderPrimary}
+        //     initialRouteName={HomeContainer}
+        //     borderTopLeftRight
+        //     renderCircle={({ selectedTab, navigate }) => (
+        //         <Animated.View style={styles.btnCircleUp}>
+        //             <Pressable>
+        //                 <Icons.FontAwesome5 name='home' onPress={() => Alert.alert('Click Action')} />
+        //             </Pressable>
+        //         </Animated.View>
+        //     )}
+        //     tabBar={renderTabBar}
+        // >
 
-                <CurvedBottomBar.Screen
-                    name="Home"
-                    position="LEFT"
-                    // component={() => <Screen1 />}
-                    component={HomeContainer}
-                />
-                <CurvedBottomBar.Screen
-                    name="title2"
-                    // component={() => <Screen2 />}
-                    component={HomeContainer}
-                    position="RIGHT"
-                />
+        //     <CurvedBottomBar.Screen
+        //         name="Home"
+        //         position="LEFT"
+        //         // component={() => <Screen1 />}
+        //         component={HomeContainer}
+        //     />
+        //     <CurvedBottomBar.Screen
+        //         name="title2"
+        //         // component={() => <Screen2 />}
+        //         component={HomeContainer}
+        //         position="RIGHT"
+        //     />
 
-            </CurvedBottomBar.Navigator>
+        // </CurvedBottomBar.Navigator>
         // </NavigationContainer>
+
+        <CurvedBottomBar.Navigator
+            type="UP"
+            style={styles.bottomBar}
+            shadowStyle={styles.shawdow}
+            height={55}
+            circleWidth={50}
+            bgColor="white"
+            initialRouteName="title1"
+            borderTopLeftRight
+            renderCircle={({ selectedTab, navigate }) => (
+                <Animated.View style={styles.btnCircleUp}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => Alert.alert('Click Action')}
+                    >
+                        {/* <Ionicons name={'apps-sharp'} color="gray" size={25} /> */}
+                        <Image source={IMAGES.guardex_logo} style={{ width: 30, height: 30 }} />
+                    </TouchableOpacity>
+                </Animated.View>
+            )}
+            tabBar={renderTabBar}
+        >
+            <CurvedBottomBar.Screen
+                name="title1"
+                position="LEFT"
+                component={() => <Screen1 />}
+            />
+            <CurvedBottomBar.Screen
+                name="title2"
+                component={() => <Screen2 />}
+                position="RIGHT"
+            />
+        </CurvedBottomBar.Navigator>
     )
 }
 
