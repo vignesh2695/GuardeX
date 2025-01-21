@@ -79,7 +79,7 @@ export const postAPIWithHeader = async (path, reqParams, isAuth) => {
 export const formdataPostApi = async (path, reqParams) => {
     try {
         console.log('form Data url: ', ApiUrls.baseUrl + path);
-        console.log('form Data request: ', reqParams);
+        console.log('form Data request: ', JSON.stringify(reqParams));
 
         // const response = await axios.post(
         //     ApiUrls.baseUrl + path,

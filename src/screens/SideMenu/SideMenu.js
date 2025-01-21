@@ -21,14 +21,21 @@ const SideMenuScreen = (props) => {
             </View>
             <View style={{ flex: 1, justifyContent: 'space-between' }}>
                 <View style={{ padding: 5 }}>
-                    {/* <Pressable
+                    <Pressable
                         onPress={() => { props._ProfileHandler() }}
                         style={{ flexDirection: 'row', gap: 20, padding: 15 }}>
                         <Icons.FontAwesome5 name='user-alt' size={15} color={COLORS.lavenderPrimary} />
                         <Text style={{ color: COLORS.black }}>My Profile</Text>
+                    </Pressable>
+                    {/* <Pressable style={{ flexDirection: 'row', gap: 20, padding: 15, borderWidth: 0.5 }} onPress={() => { props._changePasswordHandler() }}>
+                        <Icons.MaterialCommunityIcons name='shield-key' size={15} color={COLORS.lavenderPrimary} />
+                        <Text style={{ color: COLORS.black }}>Change Password</Text>
                     </Pressable> */}
                     <Pressable
-                        onPress={() => { props._logoutHandler() }}
+                        onPress={() => {
+                            props._logoutHandler()
+                            // console.log("logout press")
+                        }}
                         style={{ flexDirection: 'row', gap: 20, padding: 15 }}>
                         <Icons.AntDesign name='logout' size={15} color={COLORS.lavenderPrimary} />
                         <Text style={{ color: COLORS.black }}>Logout</Text>
@@ -38,7 +45,7 @@ const SideMenuScreen = (props) => {
                     <View style={{ width: WINDOW_WIDTH / 1.2, height: 2, backgroundColor: COLORS.borederGray, alignSelf: 'center' }} />
                     <View style={{ padding: 10, alignItems: 'center' }}>
                         <Text style={{ color: COLORS.txtGray, fontSize: 12 }}>{`Version 1.0`}</Text>
-                        <Text style={{ color: COLORS.txtGray, fontSize: 12 }}>{`Copyright© ${new Date().getFullYear()}. www.guardx.com`}</Text>
+                        <Text style={{ color: COLORS.txtGray, fontSize: 12 }}>{`Copyright© ${new Date().getFullYear()}. www.guardex.com`}</Text>
                     </View>
                 </View>
             </View>

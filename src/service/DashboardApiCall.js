@@ -4,7 +4,7 @@ import { postAPI } from "./Networking";
 
 
 export const DashboardApiCall = async (requestData) => {
-    console.log("DashboardApiCall_req => ", requestData);
+    // console.log("DashboardApiCall_req => ", requestData);
     try {
         if (await NetworkUtils.isNetworkAvailable()) {
             const dashboardApiCall_res = await postAPI("api/dashboard", requestData);

@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Animated, Image, FlatList, Pressable } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Animated, Image, FlatList, Pressable, ActivityIndicator } from 'react-native';
 import COLORS from '../../assets/Color';
 import styles from './styles';
 import { ApiUrls } from '../../service/Urls';
@@ -9,13 +9,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 import IMAGES from '../../assets/images/Images';
 import { useNavigation } from '@react-navigation/native';
-import { FireAndSmokeContainer, SideMenuContainer } from '../../container';
+import { FireAndSmokeContainer, ProfileContainer, SideMenuContainer } from '../../container';
 import { Icons } from '../../utils/Icons';
 
 // create a component
 const Home = (props) => {
 
-    const { dashboardDetails, upcomingHolidays, getMeToFireAndVideos } = props;
+    const { dashboardDetails, upcomingHolidays, latestFireAndSmoke, loading } = props;
     const [showProfile, setShowProfile] = useState(false);
     const navigation = useNavigation();
 
@@ -29,6 +29,10 @@ const Home = (props) => {
             }
         }
     }, [dashboardDetails])
+
+    useEffect(() => {
+        console.log("latestFireAndSmoke ----> ", latestFireAndSmoke);
+    }, [latestFireAndSmoke])
 
     const fadeAnim = new Animated.Value(0);
 
@@ -55,15 +59,35 @@ const Home = (props) => {
         return formattedDateString
     }
 
+    const renderFireAndSmokeList = ({ item }) => {
+        return (
+            <>
+                <Pressable onPress={() => { _onPressViewVideo(item) }} style={{ padding: 0, marginVertical: 5, height: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderBottomWidth: 1, borderBlockColor: COLORS.gray300 }}>
+                    <View style={{ flex: 1, flexDirection: 'row', gap: 5, alignItems: 'center' }}>
+                        {/* {console.log("path ", item.label)} */}
+                        {item?.image_path ?
+                            <Image source={{ uri: item?.image_path }} resizeMode='stretch' style={{ width: 80, height: 50, borderRadius: 5, paddingVertical: 5 }} /> :
+                            <Icons.MaterialCommunityIcons name='fire-alert' size={50} />}
+                        <View style={{ flex: 0.9, }}>
+                            <Text style={{ marginStart: 10, fontSize: 16, color: COLORS.black, bottom: 5 }} numberOfLines={1}> {item?.label.charAt(0).toUpperCase() + item?.label.slice(1)} </Text>
+                            <Text style={{ marginStart: 10, fontSize: 12, color: COLORS.black }} numberOfLines={1}> {moment(item?.created_at).format('DD MMM YY hh:mm A')} </Text>
+                        </View>
+                    </View>
+                    {/* <View style={{ flexDirection: 'row', gap: 6, marginRight: 7 }}>
+                    </View> */}
+                </Pressable>
+            </>
+        )
+    }
 
     return (
-        <View style={{ backgroundColor: COLORS.lavenderPrimary, flex: 1, top: 0 }}>
-            <View style={{ width: WINDOW_WIDTH, height: 60, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
+        <View style={{ flex: 1, top: 0 }}>
+            {/* <View style={{ width: WINDOW_WIDTH, height: 60, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
                 <View style={{ flex: 1 }}>
-                    <Pressable style={{ width: 40, }} onPress={() => { 
+                    <Pressable style={{ width: 40, }} onPress={() => {
                         // console.log("sidemenu pressed")
                         navigation.navigate(SideMenuContainer);
-                        }}>
+                    }}>
                         <Icons.Feather name="menu" size={30} color={COLORS.white} />
                     </Pressable>
                 </View>
@@ -73,7 +97,7 @@ const Home = (props) => {
                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
                     <Image source={IMAGES.guardex_logo} style={{ width: 30, height: 30, tintColor: COLORS.white }} />
                 </View>
-            </View>
+            </View> */}
             <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.container} showsVerticalScrollIndicator={false}>
                 {/* Profile card */}
                 {showProfile && (
@@ -93,26 +117,58 @@ const Home = (props) => {
                     </Animated.View>
                 )}
 
-                {/* Fire and Smoke */}
-                <Pressable style={[{
+                {/* <View style={[{
                     flex: 1,
                     paddingVertical: 10,
                     marginHorizontal: 5,
                     marginTop: 10,
                     borderColor: COLORS.borederGray,
-                    borderWidth: 1,
+                    borderWidth: 0.5,
                     borderRadius: 5,
-                    padding: 10,
-                    // flexDirection: 'row',
-                    // gap: 15,
+                    margin: 10,
                     alignItems: 'center',
                     justifyContent: 'center',
-                    height: WINDOW_WIDTH
-                }]}
-                    onPress={() => { navigation.navigate(FireAndSmokeContainer) }}>
-                    <Image source={IMAGES.view_course} style={{ width: 100, height: 100, }} />
-                    <Text style={{ color: COLORS.black, fontSize: 16 }}>{"Fire & Smoke Video List"}</Text>
-                </Pressable>
+                }]}>
+                    {console.log("latestFireAndSmoke ", latestFireAndSmoke)}
+                    {loading ?
+                        <ActivityIndicator color={COLORS.lavenderPrimary} size={50} />
+                        :
+
+                        latestFireAndSmoke.map((item, index) => (
+                            <>
+                                <Pressable onPress={() => { _onPressViewVideo(item) }} style={{ padding: 0, marginVertical: 5, height: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderBottomWidth: 1, borderBlockColor: COLORS.gray300 }}>
+                                    <View style={{ flex: 1, flexDirection: 'row', gap: 5, alignItems: 'center' }}>
+                                        {item?.image_path ?
+                                            <Image source={{ uri: item?.image_path }} resizeMode='stretch' style={{ width: 80, height: 50, borderRadius: 5, paddingVertical: 5 }} /> :
+                                            <Icons.MaterialCommunityIcons name='fire-alert' size={50} />}
+                                        <View style={{ flex: 0.9, }}>
+                                            <Text style={{ marginStart: 10, fontSize: 16, color: COLORS.black, bottom: 5 }} numberOfLines={1}> {item?.label.charAt(0).toUpperCase() + item?.label.slice(1)} </Text>
+                                            <Text style={{ marginStart: 10, fontSize: 12, color: COLORS.black }} numberOfLines={1}> {moment(item?.created_at).format('DD MMM YY hh:mm A')} </Text>
+                                        </View>
+                                    </View>
+                                </Pressable>
+                            </>
+                        ))
+                    }
+                </View> */}
+
+                {/* Fire and Smoke */}
+                <View style={[{
+                    paddingVertical: 10,
+                    marginHorizontal: 5,
+                    marginTop: 10,
+                    borderColor: COLORS.borederGray,
+                    borderWidth: 0.5,
+                    borderRadius: 5,
+                    margin: 10,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }]} >
+                    <Pressable onPress={() => { navigation.navigate(FireAndSmokeContainer) }} style={{ alignItems: 'center' }} >
+                        <Image source={IMAGES.view_course} style={{ width: 80, height: 80, }} resizeMode='center' />
+                        <Text style={{ color: COLORS.black, fontSize: 16, marginBottom: 20 }}>{"Fire & Smoke Video List"}</Text>
+                    </Pressable>
+                </View>
 
                 {/**Holidayyyy */}
                 <View style={{ width: WINDOW_WIDTH, paddingHorizontal: 10, marginVertical: 10, marginBottom: 60 }}>
@@ -156,10 +212,21 @@ const Home = (props) => {
                         style={{ marginVertical: 10, padding: 0 }}
                     />
                 </View>
-                <View style={{ flex: 0.3, backgroundColor: COLORS.lavenderPrimary, height: 40, position: 'absolute', borderWidth: 0.5 }}>
-
-                </View>
             </ScrollView>
+            <View style={{ flex: 0.08, backgroundColor: COLORS.lavenderPrimary, flexDirection: 'row' }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Pressable style={{ alignItems: 'center' }}>
+                        <Icons.Feather name='home' size={20} color={COLORS.white} />
+                        <Text style={{ color: COLORS.white, fontSize: 12, top: 5 }}>Home</Text>
+                    </Pressable>
+                </View>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Pressable style={{ alignItems: 'center' }} onPress={() => { navigation.navigate(ProfileContainer) }}>
+                        <Icons.Feather name='user' size={20} color={COLORS.white} />
+                        <Text style={{ color: COLORS.white, fontSize: 12, top: 5 }}>Profile</Text>
+                    </Pressable>
+                </View>
+            </View>
         </View>
     );
 };

@@ -18,7 +18,7 @@ const Login = (props) => {
             <View style={styles.container}>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     <View style={{ alignItems: 'center', paddingVertical: 30 }}>
-                        <Text style={[styles.title, { bottom: 50 }]}>Guardex</Text>
+                        <Text style={[styles.title, { bottom: 50 }]}>GuardeX</Text>
                         <Image source={IMAGES.guardex_logo} resizeMode='contain' style={styles.logoContainer} />
                         <View style={[styles.inputContainer,]}>
                             <Text style={styles.headingText}>Mobile</Text>

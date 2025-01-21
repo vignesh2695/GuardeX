@@ -53,7 +53,7 @@ const FireAndSmoke = () => {
     }
 
     const closePopupRequest = async () => {
-        // console.log("closePopupRequest");
+        console.log("closePopupRequest");
         setIsModalVisible(!isModalVisible);
     }
 

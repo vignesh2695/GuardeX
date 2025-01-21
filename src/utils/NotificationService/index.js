@@ -1,6 +1,6 @@
 import messaging from "@react-native-firebase/messaging";
 import { getFcmToken, putFcmToken } from "../../dataStorage/dataStorage";
-
+import PushNotification, { Importance } from 'react-native-push-notification';
 
 export async function requestUserPermission() {
     const authStatus = await messaging().requestPermission();
@@ -43,7 +43,12 @@ export const NotificationServices = () => {
     //foreground Message Handling
     messaging().onMessage(async remoteMessage => {
         console.log('Notification in foreground', remoteMessage);
+        showNotification(remoteMessage);
     });
+    messaging().setBackgroundMessageHandler(async remoteMessage => {
+        console.log('Notification in background', remoteMessage);
+        showNotification(remoteMessage);
+    })
     messaging()
         .getInitialNotification()
         .then(remoteMessage => {
@@ -54,4 +59,46 @@ export const NotificationServices = () => {
                 );
             }
         });
+}
+
+export const showNotification = () => {
+    console.log('showNotification called');
+    const { notification, messageId } = remoteMessage;
+
+    console.log('Notification', notification);
+
+    
+    PushNotification.createChannel(
+        {
+            channelId: 'com.guardex', // (required)
+            channelName: 'GuardeX', // (required)
+            //channelDescription: 'WowTruck Notifications', // (optional) default: undefined.
+            //playSound: true, // (optional) default: true
+            //soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
+            //importance: Importance.HIGH, // (optional) default: Importance.HIGH. Int value of the Android notification importance
+            //vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
+        },
+        created => console.log(`createChannel returned '${created}'`),
+    );
+    PushNotification.localNotification({
+        id: randomNumber(),
+        channelId: 'com.guardex',
+        messageId: messageId,
+        title: notification.title,
+        message: notification.body,
+        soundName: 'default',
+        vibrate: true,
+        playSound: true,
+        showWhen: true,
+        autoCancel: true,
+        allowWhileIdle: true,
+        invokeApp: true,
+    });
+
+}
+
+export const randomNumber = () => {
+    var num = 0;
+    num = Math.floor(Math.random() * 90000) + 10000;
+    return num;
 }

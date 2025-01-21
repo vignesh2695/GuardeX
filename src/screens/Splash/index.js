@@ -16,7 +16,7 @@ const Splash = (props) => {
         <View style={{ flex: 1 }}>
             <View style={[styles.container, { backgroundColor: COLORS.lavenderPrimary }]}>
                 <Image source={IMAGES.guardex_logo} resizeMode='cover' style={styles.logoContainer} />
-                <Text style={styles.title}>Guardex</Text>
+                <Text style={styles.title}>GuardeX</Text>
             </View>
         </View>
     );

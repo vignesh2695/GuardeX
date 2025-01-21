@@ -21,7 +21,7 @@ const Index = ({ navigation, props }) => {
                         CommonActions.reset({
                             index: 0,
                             routes: [{ name: 'HomeContainer', screen: 'HomeContainer'}]
-                            // routes: [{ name: 'BottomStack', screen: 'BottomStack' }]
+                            // routes: [{ name: 'BottomNavigationBar', screen: 'BottomNavigationBar' }]
                         })
                     )
                 } else {

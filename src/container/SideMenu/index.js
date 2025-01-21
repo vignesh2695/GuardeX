@@ -6,6 +6,8 @@ import { LogoutApiCall } from '../../service/LoginApiCall';
 import { PutUserDetails, PutUserToken } from '../../dataStorage/dataStorage';
 import Toast from '../../utils/Toast';
 import { CommonActions, useNavigation } from '@react-navigation/native';
+import ChangePasswordContainer from '../Profile/changePasswordContainer';
+import { ProfileContainer } from '..';
 
 // create a component
 const SideMenu = () => {
@@ -13,8 +15,13 @@ const SideMenu = () => {
     const navigation = useNavigation();
 
     const _ProfileHandler = async () => {
+        console.log("_ProfileHandler ");
+        navigation.navigate(ProfileContainer);
+    }
+
+    const _changePasswordHandler = async () => {
         console.log("_changePasswordHandler ");
-        // navigation.navigate(ScreenNames.PROFILE);
+        navigation.navigate(ChangePasswordContainer)
     }
 
     const logoutHandler = async () => {
@@ -39,7 +46,7 @@ const SideMenu = () => {
         <>
             <SideMenuScreen
                 _logoutHandler={logoutHandler}
-                // _changePasswordHandler={_changePasswordHandler}
+                _changePasswordHandler={_changePasswordHandler}
                 _ProfileHandler={_ProfileHandler}
             />
         </>
