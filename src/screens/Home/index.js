@@ -82,22 +82,30 @@ const Home = (props) => {
 
     return (
         <View style={{ flex: 1, top: 0 }}>
-            {/* <View style={{ width: WINDOW_WIDTH, height: 60, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
-                <View style={{ flex: 1 }}>
-                    <Pressable style={{ width: 40, }} onPress={() => {
-                        // console.log("sidemenu pressed")
-                        navigation.navigate(SideMenuContainer);
-                    }}>
-                        <Icons.Feather name="menu" size={30} color={COLORS.white} />
-                    </Pressable>
-                </View>
-                <View style={{ flex: 1, alignItems: 'center' }}>
-                    <Text style={{ textAlign: 'center', fontSize: FontSize.large, fontWeight: FontWeight.medium, color: COLORS.white }}>GuardeX</Text>
-                </View>
-                <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                    <Image source={IMAGES.guardex_logo} style={{ width: 30, height: 30, tintColor: COLORS.white }} />
-                </View>
-            </View> */}
+            <View style={{ width: WINDOW_WIDTH, height: 60, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
+                <LinearGradient
+                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', height: 60, padding: 10 }}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 0, y: 1 }}
+                    locations={[0.4, 1.1]}
+                    colors={[COLORS.lavenderPrimary, COLORS.lavenderSecondary]}
+                >
+                    <View style={{ flex: 1 }}>
+                        <Pressable style={{ width: 40, }} onPress={() => {
+                            // console.log("sidemenu pressed")
+                            navigation.navigate(SideMenuContainer);
+                        }}>
+                            <Icons.Feather name="menu" size={30} color={COLORS.white} />
+                        </Pressable>
+                    </View>
+                    <View style={{ flex: 1, alignItems: 'center' }}>
+                        <Text style={{ textAlign: 'center', fontSize: FontSize.large, fontWeight: FontWeight.medium, color: COLORS.white }}>GuardeX</Text>
+                    </View>
+                    <View style={{ flex: 1, alignItems: 'flex-end' }}>
+                        <Image source={IMAGES.guardex_logo} style={{ width: 30, height: 30, tintColor: COLORS.white }} />
+                    </View>
+                </LinearGradient>
+            </View>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.container} showsVerticalScrollIndicator={false}>
                 {/* Profile card */}
                 {showProfile && (

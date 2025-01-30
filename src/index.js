@@ -31,37 +31,38 @@ const IStack = () => {
             <Stack.Screen name='BottomStack' component={BottomStack} options={{ headerShown: false }} />
             <Stack.Screen name='BottomNavigationBar' component={BottomNavigationBar} options={{ headerShown: false }} />
             <Stack.Screen name='HomeContainer' component={HomeContainer} options={{
-                headerShown: true,
-                headerTitle: 'GuardeX',
-                headerBackground: () => (<LinearGradient
-                    style={{ flex: 1 }}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 0, y: 1 }}
-                    locations={[0.4, 1.1]}
-                    colors={[COLORS.lavenderPrimary, COLORS.lavenderSecondary]}
-                />
-                ),
-                headerLeft: () => (
-                    <Pressable
-                        onPress={() => {
-                            navigation.navigate(SideMenuContainer)
-                            // console.log("sidemenu press");
-                        }}
-                    // style={{ borderWidth: 0.5 }}
-                    >
-                        {/* <Icons.Feather name="menu" size={30} color={COLORS.white} /> */}
-                        <Image
-                            source={IMAGES.menu_line}
-                            resizeMode='contain'
-                            style={{ width: 30, height: 30, }}
-                        />
-                    </Pressable>
-                ),
-                headerRight: () => (
-                    <Image
-                        source={IMAGES.guardex_logo} style={{ width: 40, height: 40, marginRight: 10, tintColor: COLORS.white }} resizeMode='contain'
-                    />
-                )
+                headerShown: false,
+                // headerShown: true,
+                // headerTitle: 'GuardeX',
+                // headerBackground: () => (<LinearGradient
+                //     style={{ flex: 1 }}
+                //     start={{ x: 0, y: 0 }}
+                //     end={{ x: 0, y: 1 }}
+                //     locations={[0.4, 1.1]}
+                //     colors={[COLORS.lavenderPrimary, COLORS.lavenderSecondary]}
+                // />
+                // ),
+                // headerLeft: () => (
+                //     <Pressable
+                //         onPress={() => {
+                //             navigation.navigate(SideMenuContainer)
+                //             // console.log("sidemenu press");
+                //         }}
+                //     // style={{ borderWidth: 0.5 }}
+                //     >
+                //         {/* <Icons.Feather name="menu" size={30} color={COLORS.white} /> */}
+                //         <Image
+                //             source={IMAGES.menu_line}
+                //             resizeMode='contain'
+                //             style={{ width: 30, height: 30, }}
+                //         />
+                //     </Pressable>
+                // ),
+                // headerRight: () => (
+                //     <Image
+                //         source={IMAGES.guardex_logo} style={{ width: 40, height: 40, marginRight: 10, tintColor: COLORS.white }} resizeMode='contain'
+                //     />
+                // )
             }} />
 
             <Stack.Screen name='SideMenu' component={SideMenuContainer} options={{
